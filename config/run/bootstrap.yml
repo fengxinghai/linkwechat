@@ -1,0 +1,86 @@
+#spring:
+#  profiles:
+#    #active: '@spring.profiles.active@'
+#    active: dev
+spring:
+#  profiles: dev
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  cloud:
+    nacos:
+      # 配置中心
+      config:
+        # 命名空间id(此处不用public,因public初始化的空间, id为空)  4e237601-cea8-414d-b7b9-d7adc8cbcf95
+        namespace: 9ffe3f03-43d6-47cb-8744-25ee717f6a55
+        # nacos的ip地址和端口 120.79.64.17:10848
+        server-addr: 172.18.13.28:8846,172.18.13.28:8847,172.18.13.28:8848
+        # 这个就表示 在我们nacos命名空间id为 dev中 有一个data-id 为 demo-service.yml 的配置文件 读取这个里面的配置
+        file-extension: yml
+        config-retry-time: 300000
+        # 共享配置, 可以把公共配置放在同个命名空间下，然后创建一个 common.yml 文件 ，里面可以放共用的配置
+        shared-configs[0]:
+          dataId: linkwe-common.yml
+          refresh: true
+      # 发布到注册中心 （如果没有使用可以不配）
+      discovery:
+        # 命名空间id(此处不用public,因public初始化的空间, id为空)
+        namespace: ${spring.cloud.nacos.config.namespace}
+#        namespace: 9ffe3f03-43d6-47cb-8744-25ee717f6a55
+        # nacos的ip地址和端口
+        server-addr: ${spring.cloud.nacos.config.server-addr}
+#        server-addr: 10.2.176.69:8848,10.2.176.70:8848,10.2.176.71:8848
+#---
+#spring:
+#  profiles: test
+#  main:
+#    allow-bean-definition-overriding: true
+#    allow-circular-references: true
+#  cloud:
+#    nacos:
+#      # 配置中心
+#      config:
+#        # 命名空间id(此处不用public,因public初始化的空间, id为空)
+#        namespace: ewscrm
+#        # nacos的ip地址和端口
+#        server-addr: 127.0.0.1:8848
+#        # 这个就表示 在我们nacos命名空间id为 dev中 有一个data-id 为 demo-service.yml 的配置文件 读取这个里面的配置
+#        file-extension: yml
+#        config-retry-time: 300000
+#        # 共享配置, 可以把公共配置放在同个命名空间下，然后创建一个 common.yml 文件 ，里面可以放共用的配置
+#        shared-configs[0]:
+#          dataId: linkwe-common.yml
+#          refresh: true
+#      # 发布到注册中心 （如果没有使用可以不配）
+#      discovery:
+#        # 命名空间id(此处不用public,因public初始化的空间, id为空)
+#        namespace: ${spring.cloud.nacos.config.namespace}
+#        # nacos的ip地址和端口
+#        server-addr: ${spring.cloud.nacos.config.server-addr}
+#---
+#spring:
+#  profiles: prod
+#  main:
+#    allow-bean-definition-overriding: true
+#    allow-circular-references: true
+#  cloud:
+#    nacos:
+#      # 配置中心
+#      config:
+#        # 命名空间id(此处不用public,因public初始化的空间, id为空)
+#        namespace: ewscrm
+#        # nacos的ip地址和端口
+#        server-addr: 127.0.0.1:8848
+#        # 这个就表示 在我们nacos命名空间id为 dev中 有一个data-id 为 demo-service.yml 的配置文件 读取这个里面的配置
+#        file-extension: yml
+#        config-retry-time: 300000
+#        # 共享配置, 可以把公共配置放在同个命名空间下，然后创建一个 common.yml 文件 ，里面可以放共用的配置
+#        shared-configs[0]:
+#          dataId: linkwe-common.yml
+#          refresh: true
+#      # 发布到注册中心 （如果没有使用可以不配）
+#      discovery:
+#        # 命名空间id(此处不用public,因public初始化的空间, id为空)
+#        namespace: ${spring.cloud.nacos.config.namespace}
+#        # nacos的ip地址和端口
+#        server-addr: ${spring.cloud.nacos.config.server-addr}
